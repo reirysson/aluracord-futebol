@@ -4,7 +4,6 @@ import {useRouter} from 'next/router';
 import appConfig from '../config.json'
 
 function Titulo(props) {
-    console.log(props);
     const Tag = props.tag || 'h1';
     return (
         <>
@@ -20,25 +19,14 @@ function Titulo(props) {
     );
 }
 
-//Componente React
-//function HomePage(){
-    //JSX
-//    return (
-//        <div>
-//           <GlobalStyle />
-//            <Titulo tag="h2">Boas vindas de volta!</Titulo>
-//            <h2>Discord - teste</h2>
-//        </div>
-//    )
-//}
-//export default HomePage
 
 export default function PaginaInicial() {
-    //const username = 'reirysson';
     const [username, setUsername] = React.useState('reirysson');
     const roteamento = useRouter();
 
-    console.log(roteamento);
+    let caracterebaixo=username.length > 2;
+
+    //console.log(roteamento);
 
     return (
         <>
@@ -64,7 +52,7 @@ export default function PaginaInicial() {
                         width: '100%', maxWidth: '700px',
                         borderRadius: '120px', padding: '20px', margin: '20px',
                         boxShadow: '0 2px 10px 0 rgb(0 0 0 / 80%)',
-                        backgroundColor: appConfig.theme.colors.neutrals[500],
+                        backgroundColor: appConfig.theme.colors.neutrals[700],
                     }}
                 >
             {/* Formulário */}
@@ -73,7 +61,7 @@ export default function PaginaInicial() {
                         onSubmit={function (infosDoEvento){
                             infosDoEvento.preventDefault();
                             console.log('Alguém submeteu o form');
-                            roteamento.push('/chat');
+                            roteamento.push(`/chat?username=${username}`);
                             window.location.href ='/chat';
                         }}
                         styleSheet={{
@@ -125,6 +113,7 @@ export default function PaginaInicial() {
                             type='submit'
                             label='Entrar'
                             fullWidth
+                            disabled={!caracterebaixo}
                             buttonColors={{
                                 contrastColor: appConfig.theme.colors.neutrals["000"],
                                 mainColor: appConfig.theme.colors.primary[800],
@@ -152,13 +141,18 @@ export default function PaginaInicial() {
                             minHeight: '250px',
                         }}
                     >
-                        <Image
+                        {
+                         caracterebaixo && ( 
+                         <Image
                             styleSheet={{
                                 borderRadius: '50%',
                                 marginBottom: '16px',
                             }}
                             src={`https://github.com/${username}.png`}
-                        />
+                        /> 
+                            )                       
+                        }   
+                        
                         <Text
                             variant="body4"
                             styleSheet={{
