@@ -150,7 +150,7 @@ export default function ChatPage(){
                   handleNovaMensagem(mensagem);
                 }
               }}
-              placeholder="Insira sua mensagem aqui..."
+              placeholder="Bate bola..."
               type="textarea"
               styleSheet={{
                 width: "100%",
