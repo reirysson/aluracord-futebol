@@ -7,8 +7,8 @@ import { useRouter } from "next/router";
 import { ButtonSendSticker } from "../src/components/ButtonSendSticker";
 import { UserContext } from "../context/UserContext";
 import NextImagem from "next/image";
-import iconeDeletar from "../imagens/deletar.svg";
-import iconeEnviar from "../imagens/enviar.svg";
+import IconeDeletar from "../imagens/deletar.svg";
+import IconeEnviar from "../imagens/enviar.svg";
 
 
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY;
@@ -175,7 +175,7 @@ export default function ChatPage(){
                 mensagem.length > 2 ? handleNovaMensagem(mensagem) : null;
               }}
             >
-            <Image src={iconeEnviar}/>
+            <Image src={IconeEnviar}/>
             </CustomBtn>
           </Box>
         </Box>
@@ -292,7 +292,7 @@ function MessageList({
                     }
                   }}
                 >
-                <Image src={iconeDeletar}/>
+                <Image src={IconeDeletar}/>
                 </CustomBtn>
               </Box>
               {mensagem.texto.startsWith(":sticker:") ? (
