@@ -1,6 +1,6 @@
 import React from "react";
 
-const CustomBtn = ({ children, onclick }) => {
+const CustomBtn = ({ children, onClick }) => {
   return (
     <>
     <button trype="button" onClick={onClick}>

@@ -1,8 +1,9 @@
-import { Box, Button, Text, TextField, Image } from '@skynexui/components';
-import React from 'react';
-import {useRouter} from 'next/router';
-import appConfig from '../config.json'
-import { UserContext } from '../context/UserContext';
+import { Box, Button, Text, TextField, Image } from "@skynexui/components";
+import React from "react";
+import { useRouter } from "next/router";
+import appConfig from "../config.json";
+import next from "next";
+import { UserContext } from "../context/UserContext";
 
 function Titulo(props) {
     const Tag = props.tag || 'h1';
@@ -22,10 +23,10 @@ function Titulo(props) {
 
 
 export default function PaginaInicial() {
-    const [username, setUsername] = React.useState(UserContext);
+    const {userName, setUsername} = React.useContext(UserContext);
     const roteamento = useRouter();
 
-    let caracterebaixo=username.length > 2;
+    let caracterebaixo=userName.length > 2;
 
     //console.log(roteamento);
 
@@ -59,11 +60,10 @@ export default function PaginaInicial() {
             {/* Formulário */}
                     <Box
                         as="form"
-                        onSubmit={function (infosDoEvento){
-                            infosDoEvento.preventDefault();
-                            console.log('Alguém submeteu o form');
-                            roteamento.push(`/chat?username=${username}`);
-                            window.location.href ='/chat';
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            if (userName.length > 2) roteamento.push(`/chat`);
+                            else alert("O usuário está incorreto");
                         }}
                         styleSheet={{
                             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
@@ -89,7 +89,7 @@ export default function PaginaInicial() {
                         />*/}
 
                         <TextField
-                            value={username}
+                            value={userName}
                             onChange={function (event){
                                 console.log('Usuário digitou', event.target.value);
                                 // Onde está o valor que temos onde o usuário digitou?
@@ -149,7 +149,7 @@ export default function PaginaInicial() {
                                 borderRadius: '50%',
                                 marginBottom: '16px',
                             }}
-                            src={`https://github.com/${username}.png`}
+                            src={`https://github.com/${userName}.png`}
                         /> 
                             )                       
                         }   
@@ -163,7 +163,7 @@ export default function PaginaInicial() {
                                 borderRadius: '1000px'
                             }}
                         >
-                            {username}
+                            {userName}
                         </Text>
                     </Box>
                     {/* Photo Area */}
