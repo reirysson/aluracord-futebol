@@ -6,6 +6,9 @@ import { createClient } from "@supabase/supabase-js";
 import { useRouter } from "next/router";
 import { ButtonSendSticker } from "../src/components/ButtonSendSticker";
 import { UserContext } from "../context/UserContext";
+import NextImagem from "next/image";
+import iconeDeletar from "../imagens/deletar.svg";
+import iconeEnviar from "../imagens/enviar.svg";
 
 
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY;
@@ -20,7 +23,6 @@ export default function ChatPage(){
   const [loading, setLoading] = React.useState(false);
   const { userName } = React.useContext(UserContext);
   const [deletaMensagem, setDeletaMensagem] = React.useState("");
-
 
   function escutaMensagens(addNovaMensagem) {
     return supabaseClient
@@ -173,6 +175,7 @@ export default function ChatPage(){
                 mensagem.length > 2 ? handleNovaMensagem(mensagem) : null;
               }}
             >
+            <Image src={iconeEnviar}/>
             </CustomBtn>
           </Box>
         </Box>
@@ -193,11 +196,11 @@ function Header() {
           justifyContent: "space-between",
         }}
       >
-        <Text variant="heading5">Chat</Text>
+        <Text variant="heading5">Bate-papo</Text>
         <Button
           variant="tertiary"
           colorVariant="neutral"
-          label="Logout"
+          label="Sair"
           href="/"
         />
       </Box>
@@ -289,7 +292,7 @@ function MessageList({
                     }
                   }}
                 >
-                  {"/images/trash2.svg"}
+                <Image src={iconeDeletar}/>
                 </CustomBtn>
               </Box>
               {mensagem.texto.startsWith(":sticker:") ? (
