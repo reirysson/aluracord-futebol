@@ -1,4 +1,4 @@
-import { UserProvider } from "../context/UserContext"
+import {UserProvider} from "../context/UserContext";
 
 function GlobalStyle() {
     return (
@@ -29,12 +29,13 @@ function GlobalStyle() {
     );
 }
 
-export default function MyApp({Component, pageProps}){
-    console.log ('Roda em todas as páginas');
-    return (
-        <>
-            <GlobalStyle />
-            <Component {...pageProps} />
-        </>
-    );
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <UserProvider>
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </UserProvider>
+    </>
+  );
 }
