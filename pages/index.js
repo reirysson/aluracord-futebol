@@ -2,6 +2,7 @@ import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import React from 'react';
 import {useRouter} from 'next/router';
 import appConfig from '../config.json'
+import { UserContext } from '../context/UserContext';
 
 function Titulo(props) {
     const Tag = props.tag || 'h1';
@@ -21,7 +22,7 @@ function Titulo(props) {
 
 
 export default function PaginaInicial() {
-    const [username, setUsername] = React.useState('reirysson');
+    const [username, setUsername] = React.useState(UserContext);
     const roteamento = useRouter();
 
     let caracterebaixo=username.length > 2;

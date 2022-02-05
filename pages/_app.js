@@ -1,3 +1,5 @@
+import { UserProvider } from "../context/UserContext"
+
 function GlobalStyle() {
     return (
         <style global jsx>{`
