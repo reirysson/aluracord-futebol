@@ -66,7 +66,7 @@ export default function PaginaInicial() {
                         onSubmit={(e) => {
                             e.preventDefault();
                             if (userName.length > 2) roteamento.push(`/chat`);
-                            else alert("Esse usuário não existe!");
+                            else alert("Esse jogador não joga aqui!");
                         }}
                         styleSheet={{
                             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', 

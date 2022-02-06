@@ -4,6 +4,9 @@ node_modules
 # dependencies
 /node_modules
 
+# Next.js
+.next.config
+
 # local env files
 .env.local
 .env.development.local
