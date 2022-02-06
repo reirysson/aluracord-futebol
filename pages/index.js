@@ -25,10 +25,13 @@ function Titulo(props) {
 export default function PaginaInicial() {
     const {userName, setUsername} = React.useContext(UserContext);
     const roteamento = useRouter();
+    const caracterebaixo =
+        userName.length > 2
+        ? `https://github.com/${userName}.png`
+        : "https://i.ibb.co/VtCKnBD/loading-perfil.gif"
 
-    let caracterebaixo=userName.length > 2;
+    {/*let caracterebaixo=userName.length > 2;*/}
 
-    //console.log(roteamento);
 
     return (
         <>
@@ -52,7 +55,7 @@ export default function PaginaInicial() {
                             sm: 'row',
                         },
                         width: '100%', maxWidth: '700px',
-                        borderRadius: '120px', padding: '20px', margin: '20px',
+                        borderRadius: '5px', padding: '32px', margin: '20px',
                         boxShadow: '0 2px 10px 0 rgb(0 0 0 / 80%)',
                         backgroundColor: appConfig.theme.colors.neutrals[700],
                     }}
@@ -63,39 +66,22 @@ export default function PaginaInicial() {
                         onSubmit={(e) => {
                             e.preventDefault();
                             if (userName.length > 2) roteamento.push(`/chat`);
-                            else alert("O usuário está incorreto");
+                            else alert("Esse usuário não existe!");
                         }}
                         styleSheet={{
-                            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                            width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
+                            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', 
+                            width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '30px',
                         }}
                     >
                         <Titulo tag="h2">Fala torcedor!</Titulo>
                         <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
                             Pronto para um bate papo?
                         </Text>
-
-                        {/*<input 
-                            type="text"
-                            value={username}
-                            onChange={function (event){
-                                console.log('Usuário digitou', event.target.value);
-                                // Onde está o valor que temos onde o usuário digitou?
-                                const valor = event.target.value;
-                                // Trocando o valor da variável username
-                                // Isso através do React
-                                setUsername(valor);
-                            }}
-                        />*/}
-
                         <TextField
                             value={userName}
                             onChange={function (event){
                                 console.log('Usuário digitou', event.target.value);
-                                // Onde está o valor que temos onde o usuário digitou?
                                 const valor = event.target.value;
-                                // Trocando o valor da variável username
-                                // Isso através do React
                                 setUsername(valor);
                             }}
                             fullWidth
@@ -108,7 +94,6 @@ export default function PaginaInicial() {
                                 },
                             }}
                         />
-
                         {/*Botões*/}
                         <Button
                             type='submit'
@@ -124,20 +109,19 @@ export default function PaginaInicial() {
                         />
                     </Box>
                     {/* Formulário */}
-
-
                     {/* Photo Area */}
                     <Box
                         styleSheet={{
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
+                            justifyContent: 'center',
                             maxWidth: '200px',
                             padding: '20px',
                             backgroundColor: appConfig.theme.colors.neutrals[800],
                             border: '1px solid',
                             borderColor: appConfig.theme.colors.neutrals[999],
-                            borderRadius: '100px',
+                            borderRadius: '5px',
                             flex: 1,
                             minHeight: '250px',
                         }}
@@ -146,10 +130,11 @@ export default function PaginaInicial() {
                          caracterebaixo && ( 
                          <Image
                             styleSheet={{
+                                padding: '0px',
                                 borderRadius: '50%',
                                 marginBottom: '16px',
                             }}
-                            src={`https://github.com/${userName}.png`}
+                            src={caracterebaixo}
                         /> 
                             )                       
                         }   

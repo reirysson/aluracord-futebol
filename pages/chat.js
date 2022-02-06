@@ -8,7 +8,6 @@ import { ButtonSendSticker } from "../src/components/ButtonSendSticker";
 import { UserContext } from "../context/UserContext";
 import NextImagem from "next/image";
 import IconeDeletar from '../imagens/deletar.svg';
-import IconeEnviar from '../imagens/enviar.svg';
 
 
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY;
@@ -76,7 +75,7 @@ export default function ChatPage(){
         .then(({ data }) => {});
       setMensagem("");
     } else {
-      alert("Não tem mensagem no momento");
+      alert("Você não digitou nenhuma mensagem jogador");
     }
   };
 
@@ -152,7 +151,7 @@ export default function ChatPage(){
                   handleNovaMensagem(mensagem);
                 }
               }}
-              placeholder="Insira sua mensagem aqui..."
+              placeholder="Fale sobre futebol aqui..."
               type="textarea"
               styleSheet={{
                 width: "100%",
@@ -170,13 +169,33 @@ export default function ChatPage(){
                 handleNovaMensagem(`:sticker: ${sticker}`);
               }}
             />
-            <CustomBtn
-              onClick={() => {
-                mensagem.length > 2 ? handleNovaMensagem(mensagem) : null;
+            {/*CallBack*/}
+            <Button
+              disabled={!mensagem}
+              onClick={() =>{
+                if(mensagem.trim() !== '') handleNovaMensagem(mensagem)
+                else setListaMensagem('');
               }}
+              iconName="paperPlane"
+                        rounded="none"
+                        buttonColors={{
+                          contrastColor: `${appConfig.theme.colors.primary[500]}`,
+                          mainColor: `${appConfig.theme.colors.neutrals[600]}`,
+                          mainColorLight: `${appConfig.theme.colors.neutrals[600]}`,
+                          mainColorStrong: `${appConfig.theme.colors.neutrals[900]}`
+                        }}
+                        styleSheet={{
+                            borderRadius: '50%',
+                            padding: '0 3px 0 0',
+                            minWidth: '50px',
+                            minHeight: '50px',
+                            fontSize: '20px',
+                            margin: '0 8px',
+                            lineHeight: '0',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        }}
             >
-            <IconeEnviar />
-            </CustomBtn>
+            </Button>
           </Box>
         </Box>
       </Box>
@@ -217,18 +236,18 @@ function MessageList({
 }) {
   return (
     <Box
-      tag="ul"
-      styleSheet={{
-        overflow: "scroll",
-        overflowX: "hidden",
-        display: "flex",
-        wordWrap: "break-word",
-        flexDirection: "column-reverse",
-        flex: 1,
-        color: appConfig.theme.colors.neutrals["000"],
-        marginBottom: "16px",
-        wordWrap: "break-word",
-      }}
+    tag="ul"
+    styleSheet={{
+      overflow: "scroll",
+      overflowX: "hidden",
+      display: "flex",
+      wordWrap: "break-word",
+      flexDirection: "column-reverse",
+      flex: 1,
+      color: appConfig.theme.colors.neutrals["000"],
+      marginBottom: "16px",
+      wordWrap: "break-word",
+    }}
     >
       {mensagens.map((mensagem) => {
         return (
@@ -271,8 +290,7 @@ function MessageList({
                   }}
                   tag="span"
                 >
-                  {new Date().toLocaleDateString()} - {new Date().getHours()}:
-                  {new Date().getMinutes()}
+                  {new Date(mensagem.created_at).toDateString('pt-BR', {dateStyle: 'short',timeStyle: 'short'})}
                 </Text>
                 <CustomBtn
                   onClick={() => {
@@ -288,16 +306,19 @@ function MessageList({
                         handleDeleteMensagem(mensagem.id);
                       });
                     } else {
-                      alert("Você só pode deletar as suas mensagens!");
+                      alert("Calma jogador que esse chute não é seu!");
                     }
                   }}
                 >
                 <IconeDeletar />
-                {/*<Image src={IconeDeletar}/>*/}
                 </CustomBtn>
               </Box>
               {mensagem.texto.startsWith(":sticker:") ? (
-                <Image src={mensagem.texto.replace(":sticker:", "")} />
+                <Image src={mensagem.texto.replace(":sticker:", "")} 
+                height='150px'
+                width='150px'
+                src={mensagem.texto.replace(':sticker:', '')}
+                />
               ) : (
                 mensagem.texto
               )}
