@@ -1,10 +1,10 @@
 # AluraCord-Futebol ⚽
-Chat web simulando o aplicativo do discord, com o foco em futebol
+Chat web simulando o aplicativo do Discord, com personalização voltada para o futebol
 
 ## Finalizado ✔️
 
 ## Descrição do projeto 📋
-Projeto em concluído e construido durante a sermana da imersão da plataforma Alura, com o auxílio dos instrutores Paulo Silveira e Mario Souto. O AluraCord é uma replica do aplicativo Discord em que no mesmo consiste em um chat online com os usuários que podem enviar as suas mensagens e enviar figurinhas relacionadas a futebol.
+Projeto concluído e construido durante a semana da imersão React da plataforma Alura, com o auxílio dos instrutores Paulo Silveira e Mario Souto. O AluraCord é uma replica do aplicativo Discord em que no mesmo consiste em um chat online com os usuários que podem enviar as suas mensagens e enviar figurinhas relacionadas a futebol.
 ![Tela desktop com login](https://user-images.githubusercontent.com/92035697/158091033-b5f398a9-d3c6-4fe7-9e3f-1e8ab6b3d98c.png)
 
 ## 🔨 Funcionalidade do projeto
